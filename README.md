@@ -58,7 +58,7 @@ better mapping and better planning.
 </td>
 <td width="40%">
 
-<img src="assets/teaser.png" valign="center" width="100%">
+<img src="assets/teaser.png" valign="center" width="80%">
 
 </td>
 </tr>
