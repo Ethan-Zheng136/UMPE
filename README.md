@@ -2,7 +2,7 @@
 <h2>Unified Map Prior Encoder for Mapping and Planning</h2>
 <p style="font-size: 64px; font-weight: bold; margin-top: 10px;"><strong>ICRA 2026 for consideration</strong></p>
 
-<div style="display: flex; align-items: flex-start;">
+<div style="display: flex; align-items: flex-start; margin-top: 20px;">
 <div style="flex: 1; margin-right: 20px;">
 Autonomous driving systems underuse rich map priors (HD/SD vectors, rasterized SD maps, satellite imagery) due to heterogeneity and pose drift. We present UMPE, a Unified Map Prior Encoder that ingests any subset of four map types and fuses them with BEV features. UMPE uses a vector encoder with SE(2) alignment and confidence scoring, plus a raster encoder with FiLM conditioning and zero-initialized residual fusion. On nuScenes mapping, UMPE improves MapTRv2 61.5 → 67.4 mAP (+5.9) and MapQR 66.4 → 71.7 mAP (+5.3). For E2E planning, it reduces trajectory error from 0.72 → 0.42 m L2 (avg. −0.30 m) and collision rate from 0.22% → 0.12% (−0.10%). These results show that a unified,
 alignment-aware treatment of heterogeneous map priors yields better mapping and better planning
