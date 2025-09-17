@@ -16,12 +16,20 @@ Autonomous driving systems underuse rich map priors (HD/SD vectors, rasterized S
 ## Overview
 ![pipeline](assets/method.png)
 
-We first estimate map elements online by encoding multi-view images into a common BEV feature space
-to regress map element vertices. Each vertex’s uncertainty is modeled using our proposed Covariance-based Uncertainty method, which
-leverages 2D Gaussian distribution templates. This uncertainty information, along with the original map vertices, is then passed to the
-downstream trajectory prediction module, which operates in two parallel streams: one that incorporates uncertainty and one that does not.
-Finally, the proposed Proprioceptive Scenario Gating (MLP network) dynamically adapts the optimal trajectory prediction based on the
-initial future trajectories prediction from these two streams.
+UMPE has two branches. The
+vector encoder pre-aligns HD/SD polylines with a frame-wise
+SE(2) correction, encodes points via multi-frequency sinusoidal
+features, and produces polyline tokens with confidence scores.
+BEV queries then apply cross-attention with confidence bias,
+followed by normalized channel-wise gating to avoid length im-
+balance and to softly down-weight uncertain sources. The raster
+encoder shares a ResNet-18 backbone conditioned by FiLM
+(scaling/shift at every stage), performs SE(2) micro-alignment,
+and injects priors through zero-initialized residual fusion so
+the network starts from a do-no-harm baseline and learns
+to add only useful prior evidence. A vector-then-raster fusion
+order reflects the inductive bias of “geometry first, appearance
+second.”
 
 ## Our results
 
