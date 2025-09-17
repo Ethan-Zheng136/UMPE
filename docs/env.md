@@ -1,6 +1,6 @@
 # Step-by-step installation instructions
 
-## MapTRv2 & MapQR
+## MapTRv2
 
 Following https://mmdetection3d.readthedocs.io/en/latest/getting_started.html#installation
 
@@ -8,8 +8,8 @@ Following https://mmdetection3d.readthedocs.io/en/latest/getting_started.html#in
 
 **a. Create a conda virtual environment and activate it.**
 ```shell
-conda create -n maptr python=3.8 -y
-conda activate maptr
+conda create -n maptrv2 python=3.8 -y
+conda activate maptrv2
 ```
 
 **b. Install PyTorch and torchvision following the [official instructions](https://pytorch.org/).**
@@ -48,26 +48,28 @@ git clone https://github.com/hustvl/MapTR.git
 
 **g. Install mmdet3d and GKT**
 ```shell
-cd /path/to/MapTR/mmdetection3d
+cd /path/to/Maptrv2/mmdetection3d
 python setup.py develop
 
-cd /path/to/MapTR/projects/mmdet3d_plugin/maptr/modules/ops/geometric_kernel_attn
+cd /path/to/Maptrv2/projects/mmdet3d_plugin/maptr/modules/ops/geometric_kernel_attn
 python setup.py build install
 
 ```
 
 **h. Install other requirements.**
 ```shell
-cd /path/to/MapTR
+cd /path/to/Maptrv2
 pip install -r requirement.txt
 ```
 
 **i. Prepare pretrained models.**
 ```shell
-cd /path/to/MapTR
+cd /path/to/Maptrv2
 mkdir ckpts
 
 cd ckpts 
 wget https://download.pytorch.org/models/resnet50-19c8e357.pth
 wget https://download.pytorch.org/models/resnet18-f37072fd.pth
 ```
+
+## Note: MapQR follows the same installation steps as MapTRv2 above.
