@@ -13,6 +13,11 @@ alignment-aware treatment of heterogeneous map priors yields better mapping and 
 </td>
 </tr>
 </table> -->
+<style>
+table { border: 0 !important; }
+td { border: 0 !important; }
+</style>
+
 <table>
 <tr>
 <td width="60%">
