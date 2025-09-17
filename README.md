@@ -54,11 +54,11 @@ second.”
 - [x] Code release
   - [x] MapTRv2
   - [x] MapQR
-  - [x] VAD
+  - [] VAD
 - [x] Visualization Code
 - [x] Untested version released + Instructions
-- [x] Initialization
-- [x] Checkpoint release
+- [] Initialization
+- [] Checkpoint release
 
 
 
