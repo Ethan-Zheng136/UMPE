@@ -37,17 +37,16 @@ second.”
 
 ![mainable](assets/maintable.jpg)
 
-## Our demo video
+<!-- ## Our demo video
 Click the cover image to watch the HD demo on YouTube.
-[![Watch the video](assets/video_cover.png)](https://youtu.be/SbicP4tTv7I)
+[![Watch the video](assets/video_cover.png)](https://youtu.be/SbicP4tTv7I) -->
 
 ## Getting Started
 - [Environment Setup](docs/env.md)
 - [Prepare Dataset](docs/prepare_dataset.md)
 - [Mapping Train and Eval](docs/map.md)
-- [Merge Map and Trajectory Dataset](docs/adaptor.md)
-- [Trajectory Train and Eval](docs/trj.md)
-- [Visualization](docs/visualization.md)
+- [E2E planning Train and Eval](docs/planning.md)
+- [Visualization](docs/vis.md)
 
 ## Checkpoints
 Our trajectory prediction checkpoints are [here](https://drive.google.com/drive/folders/1npxVMMCyMgckBBXUnuRW8M3sYexpAObd?usp=sharing).
@@ -57,21 +56,27 @@ Our trajectory prediction checkpoints are [here](https://drive.google.com/drive/
 All the trajectory prediction data（for `MapTR`, `StreamMapNet`, `MapTRv2` and `MapTRv2 CL`）can be generated using our future checkpoints, with a total size of approximately 600GB.
 Dataset Structure is as follows:
 ```
-DelvingUncPrediction
-├── trj_data/
-│   ├── maptr/
-│   |   ├── train/
-│   |   |   ├── data/
-│   |   |   |   ├── scene-{scene_id}.pkl
-│   |   ├── val/
-│   ├── maptrv2/
-│   ├── maptrv2_CL/
-│   ├── stream/
+UMPE
+├── data/
+│   ├── can_bus/
+│   ├── nuscenes/
+│   │   ├── maps/
+│   │   ├── samples/
+│   │   ├── sweeps/
+│   │   ├── v1.0-test/
+|   |   ├── v1.0-trainval/
+|   |   ├── nuscenes_infos_temporal_train.pkl
+|   |   ├── nuscenes_infos_temporal_val.pkl
+│   ├── argoverse2/
+│   │   ├── sensor/
+|   |   |   |—— train/
+|   |   |   |—— val/
+|   |   |   |—— test/
 ```
 
 ## Catalog
 
-- [x] Code release
+<!-- - [x] Code release
   - [x] MapTR
   - [x] MapTRv2
   - [x] StreamMapNet
@@ -79,7 +84,7 @@ DelvingUncPrediction
   - [x] DenseTNT
 - [x] Visualization Code
 - [x] Untested version released + Instructions
-- [x] Initialization
+- [x] Initialization -->
 
 
 
