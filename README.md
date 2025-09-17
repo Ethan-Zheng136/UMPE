@@ -6,7 +6,7 @@
 
 # Unified Map Prior Encoder for Mapping and Planning
 
-**Submit ICRA 2026 for consideration**
+***Submit ICRA 2026 for consideration***
 
 <div align="left">
 <img align="right" src="assets/teaser.png" width="300">
