@@ -39,9 +39,6 @@ second.”
 
 ![mainable](assets/maintable.jpg)
 
-<!-- ## Our demo video
-Click the cover image to watch the HD demo on YouTube.
-[![Watch the video](assets/video_cover.png)](https://youtu.be/SbicP4tTv7I) -->
 
 ## Getting Started
 - [Environment Setup](docs/env.md)
@@ -51,43 +48,17 @@ Click the cover image to watch the HD demo on YouTube.
 - [Visualization](docs/vis.md)
 
 
-## Checkpoints
-Our trajectory prediction checkpoints are [here](https://drive.google.com/drive/folders/1npxVMMCyMgckBBXUnuRW8M3sYexpAObd?usp=sharing).
-
-## Dataset
-
-All the trajectory prediction data（for `MapTR`, `StreamMapNet`, `MapTRv2` and `MapTRv2 CL`）can be generated using our future checkpoints, with a total size of approximately 600GB.
-Dataset Structure is as follows:
-```
-UMPE
-├── data/
-│   ├── can_bus/
-│   ├── nuscenes/
-│   │   ├── maps/
-│   │   ├── samples/
-│   │   ├── sweeps/
-│   │   ├── v1.0-test/
-|   |   ├── v1.0-trainval/
-|   |   ├── nuscenes_infos_temporal_train.pkl
-|   |   ├── nuscenes_infos_temporal_val.pkl
-│   ├── argoverse2/
-│   │   ├── sensor/
-|   |   |   |—— train/
-|   |   |   |—— val/
-|   |   |   |—— test/
-```
 
 ## Catalog
 
-<!-- - [x] Code release
-  - [x] MapTR
+- [x] Code release
   - [x] MapTRv2
-  - [x] StreamMapNet
-  - [x] HiVT
-  - [x] DenseTNT
+  - [x] MapQR
+  - [x] VAD
 - [x] Visualization Code
 - [x] Untested version released + Instructions
-- [x] Initialization -->
+- [x] Initialization
+- [x] Checkpoint release
 
 
 
@@ -97,14 +68,3 @@ UMPE
 This repository is licensed under [Apache 2.0](LICENSE).
 
 
-## Citation
-If you find this project useful, feel free to cite our work!
-
-```bibtex
-@article{zhang2025delving,
-  title={Delving into Mapping Uncertainty for Mapless Trajectory Prediction},
-  author={Zhang, Zongzheng and Qiu, Xuchong and Zhang, Boran and Zheng, Guantian and Gu, Xunjiang and Chi, Guoxuan and Gao, Huan-ang and Wang, Leichen and Liu, Ziming and Li, Xinrun and others},
-  journal={arXiv preprint arXiv:2507.18498},
-  year={2025}
-}
-```
