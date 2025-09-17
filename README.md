@@ -10,6 +10,9 @@ alignment-aware treatment of heterogeneous map priors yields better mapping and 
 </td>
 <td width="40%">
 <img src="assets/teaser.png" alt="UMPE teaser" style="width: 40%; height: auto;">
+</td>
+</tr>
+</table>
 
 ## Overview
 ![pipeline](assets/method.png)
