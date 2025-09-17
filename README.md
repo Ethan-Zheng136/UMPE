@@ -9,7 +9,7 @@ Autonomous driving systems underuse rich map priors (HD/SD vectors, rasterized S
 alignment-aware treatment of heterogeneous map priors yields better mapping and better planning
 </td>
 <td width="40%">
-<img src="assets/teaser.png" alt="UMPE teaser" style="width: 100%; height: auto;">
+<img src="assets/teaser.png" alt="UMPE teaser" style="width: 40%; height: auto;">
 
 ## Overview
 ![pipeline](assets/method.png)
