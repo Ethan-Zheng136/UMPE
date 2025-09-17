@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
 <h2>Unified Map Prior Encoder for Mapping and Planning</h2>
 <p style="font-size: 64px; font-weight: bold; margin-top: 10px;"><strong>Submit ICRA 2026 for consideration</strong></p>
 
@@ -41,14 +41,13 @@ second.”
 Click the cover image to watch the HD demo on YouTube.
 [![Watch the video](assets/video_cover.png)](https://youtu.be/SbicP4tTv7I) -->
 
-<div align="left">
 ## Getting Started
 - [Environment Setup](docs/env.md)
 - [Prepare Dataset](docs/prepare_dataset.md)
 - [Mapping Train and Eval](docs/map.md)
 - [E2E planning Train and Eval](docs/planning.md)
 - [Visualization](docs/vis.md)
-</div>
+
 
 ## Checkpoints
 Our trajectory prediction checkpoints are [here](https://drive.google.com/drive/folders/1npxVMMCyMgckBBXUnuRW8M3sYexpAObd?usp=sharing).
