@@ -1,6 +1,8 @@
 <div align="left">
+<div align="center">
 <h2>Unified Map Prior Encoder for Mapping and Planning</h2>
 <p style="font-size: 64px; font-weight: bold; margin-top: 10px;"><strong>Submit ICRA 2026 for consideration</strong></p>
+</div>
 
 </td>
 </tr>
