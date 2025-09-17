@@ -16,6 +16,7 @@ Autonomous driving systems underuse rich map priors (HD/SD vectors, rasterized S
 ## Overview
 ![pipeline](assets/method.png)
 
+<div align="left">
 UMPE has two branches. The
 vector encoder pre-aligns HD/SD polylines with a frame-wise
 SE(2) correction, encodes points via multi-frequency sinusoidal
@@ -30,6 +31,7 @@ the network starts from a do-no-harm baseline and learns
 to add only useful prior evidence. A vector-then-raster fusion
 order reflects the inductive bias of “geometry first, appearance
 second.”
+</div>
 
 ## Our results
 
