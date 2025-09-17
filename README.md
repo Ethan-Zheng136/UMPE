@@ -35,7 +35,7 @@ second.”
 
 ## Our results
 
-![Main_Table](assets/maintable.png)
+![mainable](assets/maintable.jpg)
 
 ## Our demo video
 Click the cover image to watch the HD demo on YouTube.
