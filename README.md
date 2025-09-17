@@ -15,7 +15,7 @@ Autonomous driving systems underuse rich map priors (HD/SD vectors, rasterized S
 
 </div> -->
 
-<table width="65%">
+<table>
 <tr>
 <td width="60%" valign="top">
 
@@ -58,7 +58,7 @@ better mapping and better planning.
 </td>
 <td width="40%">
 
-<img src="assets/teaser.png" valign="center" width="80%">
+<img src="assets/teaser.png" valign="center" width="100%">
 
 </td>
 </tr>
