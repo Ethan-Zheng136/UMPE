@@ -90,7 +90,7 @@ second.”
 
 **MAPPING RESULTS ON ARGOVERSE 2 VALIDATION DATASET**  
 <div align="center">
-  <img src="assets/maintable_av2.jpg" width="40%">
+  <img src="assets/maintable_av2.jpg" width="50%">
 </div>
 
 **PLANNING RESULTS ON NUSCENES VALIDATION DATASET**  
