@@ -89,10 +89,10 @@ MAPPING RESULTS ON NUSCENES VALIDATION DATASET
 ![mainable](assets/maintable.jpg)
 
 MAPPING RESULTS ON ARGOVERSE 2 VALIDATION DATASET
-<img src="assets/maintable_av2.jpg" width="70%">
+<img src="assets/maintable_av2.jpg" width="70%" valign="center">
 
 PLANNING RESULTS ON NUSCENES VALIDATION DATASET
-<img src="assets/maintable_vad.jpg" width="70%">
+<img src="assets/maintable_vad.jpg" width="70%" valign="center">
 
 
 
