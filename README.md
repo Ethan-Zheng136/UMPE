@@ -30,7 +30,7 @@ drift, and inconsistent availability at test time. We present
 UMPE, a Unified Map Prior Encoder that can ingest any
 subset of four priors and fuse them with BEV features for
 both mapping and planning. UMPE has two branches. The
-vector encoder pre-aligns HD/SD polylines with a frame-wise
+vector encoder **pre-aligns HD/SD polylines** with a frame-wise
 SE(2) correction, encodes points via multi-frequency sinusoidal
 features, and produces polyline tokens with confidence scores.
 BEV queries then apply cross-attention with confidence bias,
