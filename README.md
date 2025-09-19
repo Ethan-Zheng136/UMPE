@@ -85,8 +85,15 @@ second.”
 </div>
 
 ## Our results
-
+MAPPING RESULTS ON NUSCENES VALIDATION DATASET
 ![mainable](assets/maintable.jpg)
+
+MAPPING RESULTS ON ARGOVERSE 2 VALIDATION DATASET
+![mainable](assets/maintable_av2.jpg)
+
+PLANNING RESULTS ON NUSCENES VALIDATION DATASET
+![mainable](assets/maintable_vad.jpg)
+
 
 
 ## Getting Started
