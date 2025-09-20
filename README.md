@@ -83,7 +83,7 @@ second.”
 ## Our results
 **MAPPING RESULTS ON NUSCENES VALIDATION DATASET**
 ![mainable](assets/maintable.jpg)
-![vis](assets/all_final_video_reduced.gif)
+![vis](assets/mapping1.gif)
 ![vis](assets/bed67ef03c4a4066a74f6c0117d512ee_video_reduced.gif)
 
 
