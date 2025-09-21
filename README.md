@@ -96,6 +96,7 @@ second.”
 <div align="center">
   <img src="assets/maintable_vad.jpg" width="70%">
 </div>
+
 ![vis](assets/1_video.gif)
 ![vis](assets/2_video.gif)
 ![vis](assets/3_video.gif)
