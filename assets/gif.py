@@ -1,7 +1,7 @@
 from moviepy import VideoFileClip 
 
-input_path = "/Users/ethan-zheng/Desktop/UMPE/assets/mapping1.mp4"
-output_path = "/Users/ethan-zheng/Desktop/UMPE/assets/mapping1.gif"
+input_path = "/Users/ethan-zheng/Desktop/UMPE/assets/mapping2.mp4"
+output_path = "/Users/ethan-zheng/Desktop/UMPE/assets/mapping2.gif"
 
 clip = VideoFileClip(input_path)
 
