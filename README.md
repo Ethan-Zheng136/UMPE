@@ -97,10 +97,10 @@ second.”
   <img src="assets/maintable_vad.jpg" width="70%">
 </div>
 
-![vis](assets/1_video.gif)
-![vis](assets/2_video.gif)
-![vis](assets/3_video.gif)
-![vis](assets/4_video.gif)
+![vis](assets/1_video_new.gif)
+![vis](assets/2_video_new.gif)
+![vis](assets/3_video_new.gif)
+![vis](assets/4_video_new.gif)
 
 
 ## Getting Started
