@@ -84,7 +84,7 @@ second.”
 **MAPPING RESULTS ON NUSCENES VALIDATION DATASET**
 ![mainable](assets/maintable.jpg)
 ![vis](assets/mapping1.gif)
-![vis](assets/mapping2.gif)
+![vis](assets/mapping2_new.gif)
 
 
 **MAPPING RESULTS ON ARGOVERSE 2 VALIDATION DATASET**  
