@@ -63,7 +63,7 @@ order reflects the inductive bias of “geometry first, appearance
 second.”
 </div>
 
-# Prior Preparation
+## Prior Preparation
 The prior datasets of nuScenes and Argoverse 2 are obtained manually, which includes vectorized HD/SD maps, rasterized SD maps and satellite maps. Vectorized HD maps are processed from the primitive dataset records and the official APIs. Vectorized SD maps are obtained through the scripts of SMERF by accessing OpenStreetMap API. Rasterized SD maps are post-processed from SD map polylines by drawing each category on one channel and stacking together. The satellite maps of nuScenes can be found published online, but Argoverse 2 cannot.
 <div align="center">
   <img src="assets/av2-preparation.jpg" width="60%">
