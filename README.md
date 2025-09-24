@@ -64,7 +64,9 @@ second.”
 </div>
 
 # Prior Preparation
-![prior](assets/av2-preparation.jpg)
+<div align="center">
+  <img src="assets/av2-preparation.jpg" width="70%">
+</div>
 
 ## Our results
 **MAPPING RESULTS ON NUSCENES VALIDATION DATASET**
