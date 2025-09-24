@@ -1,0 +1,3 @@
+[submodule "VAD"]
+	path = VAD
+	url = https://github.com/hustvl/VAD.git
