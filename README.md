@@ -80,6 +80,9 @@ order reflects the inductive bias of “geometry first, appearance
 second.”
 </div>
 
+# Prior Preparation
+![prior](assets/av2-prior.jpg)
+
 ## Our results
 **MAPPING RESULTS ON NUSCENES VALIDATION DATASET**
 ![mainable](assets/maintable.jpg)
