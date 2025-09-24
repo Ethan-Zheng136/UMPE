@@ -133,7 +133,7 @@ class VADPerceptionTransformer(BaseModule):
                  num_feature_levels=4,
                  num_cams=6,
                  two_stage_num_proposals=300,
-                 # ===zgt===
+    
                  raster_encoder=None,
                  fusion_module=None,
 
@@ -160,8 +160,6 @@ class VADPerceptionTransformer(BaseModule):
             self.map_decoder = build_transformer_layer_sequence(map_decoder)
         else:
             self.map_decoder = None
-
-        # ===zgt===
         if raster_encoder is not None:  
             self.raster_encoder = build_transformer_layer_sequence(raster_encoder)
         else:
@@ -205,8 +203,6 @@ class VADPerceptionTransformer(BaseModule):
 
     def init_weights(self):
         """Initialize the transformer weights."""
-
-        # ===zgt===
         # if hasattr(self, 'satellite_encoder') and self.satellite_encoder is not None:
         #     print("=== before init_weights ===")
         #     for name, param in self.satellite_encoder.named_parameters():
@@ -361,7 +357,7 @@ class VADPerceptionTransformer(BaseModule):
                 map_reg_branches=None,
                 map_cls_branches=None,                
                 prev_bev=None,    
-                # ===zgt===
+
                 satellite_img=None,
                 SDRaster_img=None,        
                 **kwargs):
@@ -411,8 +407,6 @@ class VADPerceptionTransformer(BaseModule):
             bev_pos=bev_pos,
             prev_bev=prev_bev,
             **kwargs)  # bev_embed shape: bs, bev_h*bev_w, embed_dims
-
-        # ===zgt===
         if self.raster_encoder is not None and (satellite_img is not None or SDRaster_img is not None):  
             prior_bev = self.raster_encoder(
                 sat=satellite_img,          # [1, 200, 200, 3] or None

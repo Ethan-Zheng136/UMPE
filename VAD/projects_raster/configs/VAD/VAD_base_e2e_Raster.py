@@ -169,7 +169,6 @@ model = dict(
             use_shift=True,
             use_can_bus=True,
             embed_dims=_dim_,
-            # ===zgt===
             raster_encoder=dict(
                 type='StageFiLMRasterEncoder', 
                 embed_dims=_dim_,
@@ -338,7 +337,6 @@ train_pipeline = [
     dict(type='RandomScaleImageMultiViewImage', scales=[0.8]),
     dict(type='PadMultiViewImage', size_divisor=32),
     dict(type='CustomDefaultFormatBundle3D', class_names=class_names, with_ego=True),
-    # ===zgt===
     dict(type='LoadSatelliteFromFile', to_float32=True, normalize=True),
     dict(type='LoadSDRasterFromFile', to_float32=True, normalize=True),
     dict(type='CustomCollect3D',\
@@ -360,7 +358,6 @@ test_pipeline = [
     dict(type='CustomObjectNameFilter', classes=class_names),
     dict(type='NormalizeMultiviewImage', **img_norm_cfg),
     # dict(type='PadMultiViewImage', size_divisor=32),
-    # ===zgt===
     dict(type='LoadSatelliteFromFile', to_float32=True, normalize=True),
     dict(type='LoadSDRasterFromFile', to_float32=True, normalize=True),
     dict(
@@ -437,7 +434,6 @@ optimizer = dict(
     paramwise_cfg=dict(
         custom_keys={
             'img_backbone': dict(lr_mult=0.1),
-            # ===zgt===
             # 'img_backbone': dict(lr_mult=0.0),            
             # 'pts_bbox_head.transformer.raster_encoder': dict(lr_mult=0.1),
             # 'pts_bbox_head.transformer.raster_encoder': dict(lr_mult=5.0),

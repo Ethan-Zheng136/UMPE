@@ -124,7 +124,6 @@ class VAD(MVXTwoStageDetector):
                           ego_fut_cmd=None,
                           ego_lcf_feat=None,
                           gt_attr_labels=None,
-                          # ===zgt===
                           satellite_img=None,
                           SDRaster_img=None,
                           ):
@@ -204,7 +203,7 @@ class VAD(MVXTwoStageDetector):
                       gt_labels=None,
                       gt_bboxes=None,
                       img=None,
-                      # ===zgt===
+                    
                       satellite_img=None,
                       SDRaster_img=None,
 
@@ -274,7 +273,7 @@ class VAD(MVXTwoStageDetector):
         gt_bboxes_3d,
         gt_labels_3d,
         img=None,
-        # ===zgt===
+    
         satellite_img=None,
         SDRaster_img=None,
 
@@ -290,7 +289,7 @@ class VAD(MVXTwoStageDetector):
                 raise TypeError('{} must be a list, but got {}'.format(
                     name, type(var)))
         img = [img] if img is None else img
-        # ===zgt===
+    
         satellite_img = [satellite_img] if satellite_img is None else satellite_img
         SDRaster_img = [SDRaster_img] if SDRaster_img is None else SDRaster_img
         
@@ -325,7 +324,7 @@ class VAD(MVXTwoStageDetector):
             ego_fut_cmd=ego_fut_cmd[0],
             ego_lcf_feat=ego_lcf_feat[0],
             gt_attr_labels=gt_attr_labels,
-            # ===zgt===
+        
             satellite_img=satellite_img[0],
             SDRaster_img=SDRaster_img[0],
 
@@ -353,7 +352,7 @@ class VAD(MVXTwoStageDetector):
         ego_fut_cmd=None,
         ego_lcf_feat=None,
         gt_attr_labels=None,
-        # ===zgt===
+    
         satellite_img=None,
         SDRaster_img=None,
 
@@ -376,7 +375,7 @@ class VAD(MVXTwoStageDetector):
             ego_fut_cmd=ego_fut_cmd,
             ego_lcf_feat=ego_lcf_feat,
             gt_attr_labels=gt_attr_labels,
-            # ===zgt===
+        
             satellite_img=satellite_img,
             SDRaster_img=SDRaster_img,
         )
@@ -401,7 +400,7 @@ class VAD(MVXTwoStageDetector):
         ego_fut_cmd=None,
         ego_lcf_feat=None,
         gt_attr_labels=None,
-        # ===zgt===
+    
         satellite_img=None,
         SDRaster_img=None,
     ):

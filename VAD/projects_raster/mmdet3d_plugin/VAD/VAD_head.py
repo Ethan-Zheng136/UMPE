@@ -485,7 +485,6 @@ class VADHead(DETRHead):
                 only_bev=False,
                 ego_his_trajs=None,
                 ego_lcf_feat=None,
-                # ===zgt===
                 satellite_img=None,
                 SDRaster_img=None,
             ):
@@ -533,7 +532,6 @@ class VADHead(DETRHead):
                 bev_pos=bev_pos,
                 img_metas=img_metas,
                 prev_bev=prev_bev,
-                # ===zgt===
                 satellite_img=satellite_img,
                 SDRaster_img=SDRaster_img,
             )
@@ -554,7 +552,6 @@ class VADHead(DETRHead):
                 map_cls_branches=self.map_cls_branches if self.as_two_stage else None,
                 img_metas=img_metas,
                 prev_bev=prev_bev,
-                # ===zgt===
                 satellite_img=satellite_img,
                 SDRaster_img=SDRaster_img,
         )
