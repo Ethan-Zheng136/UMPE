@@ -81,7 +81,7 @@ second.”
 </div>
 
 # Prior Preparation
-![prior](assets/av2-prior.jpg)
+![prior](assets/av2-preparation.jpg)
 
 ## Our results
 **MAPPING RESULTS ON NUSCENES VALIDATION DATASET**
