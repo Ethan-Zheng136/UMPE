@@ -67,7 +67,7 @@ second.”
 <div align="center">
   <img src="assets/prior_example.jpg" width="40%">
 </div>
-The prior datasets of nuScenes and Argoverse 2 are obtained manually, which includes vectorized [HD maps](example/hdmap_example.json) and [SD maps](example/sdmap_example.json), [rasterized SD maps](example/rasterized_sdmap.png) and [satellite maps](example/rasterized_sdmap.png). Vectorized HD maps are processed from the primitive dataset records and the official APIs. Vectorized SD maps are obtained through the scripts of SMERF by accessing OpenStreetMap API. Rasterized SD maps are post-processed from SD map polylines by drawing each category on one channel and stacking together. The satellite maps of nuScenes can be found published online, but Argoverse 2 cannot.
+The prior datasets of nuScenes and Argoverse 2 are obtained manually, which includes vectorized [HD maps](example/hdmap_example.json) and [SD maps](example/sdmap_example.json), [rasterized SD maps](example/rasterized_sdmap.png) and [satellite maps](example/satellite.png). Vectorized HD maps are processed from the primitive dataset records and the official APIs. Vectorized SD maps are obtained through the scripts of SMERF by accessing OpenStreetMap API. Rasterized SD maps are post-processed from SD map polylines by drawing each category on one channel and stacking together. The satellite maps of nuScenes can be found published online, but Argoverse 2 cannot.
 <div align="center">
   <img src="assets/av2-preparation.jpg" width="50%">
 </div>
