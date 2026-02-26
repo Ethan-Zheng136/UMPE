@@ -71,7 +71,7 @@ The prior datasets of nuScenes and Argoverse 2 are obtained manually, which incl
 
 The satellite imagery of Argoverse 2 is obtained from the OpenSatMap dataset published on Huggingface, which covers the areas of all six cities Argoverse 2 needs. Each of its imagery is spliced with 8 × 8, 64 in total, images, with the center coordinates of each tile provided. So, we can calculate the the WGS84 range each whole imagery covers. Then, with the ego WGS84 coordinates of each timestamp, we could search which imagery every ego pose lies in and crop the corresponding map patch.
 
-Our pre-processed map prior datasets for nuScenes and Argoverse 2 are available for download [**here**](hugginface link).
+Our pre-processed map prior datasets for nuScenes and Argoverse 2 are available for download [**here**](https://github.com/Ethan-Zheng136/UMPE/blob/main/README.md).
 
 ## Our results
 **MAPPING RESULTS ON NUSCENES VALIDATION DATASET**
