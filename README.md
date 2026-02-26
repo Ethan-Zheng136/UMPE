@@ -95,6 +95,8 @@ Our pre-processed map prior datasets for nuScenes and Argoverse 2 are available 
 ![vis](assets/3_video_new.gif)
 ![vis](assets/4_video_new.gif)
 
+Our checkpoints for MapTRv2 and MapQR are available for download [**here**](https://github.com/Ethan-Zheng136/UMPE/blob/main/README.md).
+
 
 ## Getting Started
 - [Environment Setup](docs/env.md)
