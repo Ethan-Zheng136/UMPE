@@ -1,9 +1,9 @@
 # Unified Map Prior Encoder for Mapping and Planning
 
-***ICRA 2026 Submission***
+***ICRA 2026***
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="55%" valign="top">
 
 Online mapping and end-to-end (E2E) planning
 in autonomous driving are still largely sensor-centric, leaving
@@ -22,20 +22,10 @@ encoder shares a **ResNet-18 backbone conditioned by FiLM (scaling/shift at ever
 and injects priors through **zero-initialized residual fusion** so
 the network starts from a do-no-harm baseline and learns
 to add only useful prior evidence. A vector-then-raster fusion
-order reflects the inductive bias of **“geometry first, appearance second.”** On nuScenes mapping, UMPE lifts MapTRv2 from
-**61.5 → 67.4 mAP (+5.9)** and MapQR from **66.4 → 71.7 mAP (+5.3)**. On Argoverse2, UMPE adds +4.1 mAP over strong
-baselines. UMPE is compositional: when trained with all priors,
-it outperforms single-prior models even when only one prior
-is available at test time, demonstrating powerset robustness.
-For E2E planning (VAD backbone, nuScenes), UMPE reduces
-trajectory error from **0.72 → 0.42 m L2 (avg. −0.30 m)** and
-collision rate from **0.22% → 0.12% (−0.10%)**, surpassing recent
-prior-injection methods. These results show that a unified,
-alignment-aware treatment of heterogeneous map priors yields
-better mapping and better planning. 
+order reflects the inductive bias of **“geometry first, appearance second.”** 
 
 </td>
-<td width="50%">
+<td width="45%">
 
 <img src="assets/teaser.png" valign="center" width="80%">
 
