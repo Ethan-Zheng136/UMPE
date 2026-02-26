@@ -1,6 +1,11 @@
+<div align="center">
+
 # Unified Map Prior Encoder for Mapping and Planning
 
 ***ICRA 2026***
+
+</div>
+
 <table>
 <tr>
 <td width="60%" valign="top">
