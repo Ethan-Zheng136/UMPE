@@ -107,8 +107,8 @@ The satellite imagery of Argoverse 2 is obtained from the OpenSatMap dataset pub
   - [ ] VAD
 - [x] Visualization Code
 - [x] Untested version released + Instructions
-- [ ] Initialization
-- [ ] Checkpoint release
+- [x] Initialization
+- [x] Checkpoint release
 
 
 
