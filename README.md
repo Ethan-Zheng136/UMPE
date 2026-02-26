@@ -3,7 +3,7 @@
 ***ICRA 2026***
 <table>
 <tr>
-<td width="55%" valign="top">
+<td width="60%" valign="top">
 
 Online mapping and end-to-end (E2E) planning
 in autonomous driving are still largely sensor-centric, leaving
@@ -25,7 +25,7 @@ to add only useful prior evidence. A vector-then-raster fusion
 order reflects the inductive bias of **“geometry first, appearance second.”** 
 
 </td>
-<td width="45%">
+<td width="40%">
 
 <img src="assets/teaser.png" valign="center" width="80%">
 
