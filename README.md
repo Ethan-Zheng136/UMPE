@@ -3,7 +3,7 @@
 ***ICRA 2026 Submission***
 <table>
 <tr>
-<td width="60%" valign="top">
+<td width="50%" valign="top">
 
 Online mapping and end-to-end (E2E) planning
 in autonomous driving are still largely sensor-centric, leaving
@@ -35,7 +35,7 @@ alignment-aware treatment of heterogeneous map priors yields
 better mapping and better planning. 
 
 </td>
-<td width="40%">
+<td width="50%">
 
 <img src="assets/teaser.png" valign="center" width="80%">
 
