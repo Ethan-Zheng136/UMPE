@@ -8,7 +8,7 @@
 
 <table>
 <tr>
-<td width="60%" valign="center">
+<td width="57%" valign="center">
 
 Online mapping and end-to-end (E2E) planning
 in autonomous driving are still largely sensor-centric, leaving
@@ -30,7 +30,7 @@ to add only useful prior evidence. A vector-then-raster fusion
 order reflects the inductive bias of **“geometry first, appearance second.”** 
 
 </td>
-<td width="40%">
+<td width="43%">
 
 <img src="assets/teaser.png" valign="center" width="100%">
 
