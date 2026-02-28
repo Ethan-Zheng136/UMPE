@@ -4,7 +4,7 @@
 
 ***ICRA 2026***
 
-</div>
+<!-- </div>
 
 <table>
 <tr>
@@ -56,7 +56,7 @@ the network starts from a do-no-harm baseline and learns
 to add only useful prior evidence. A vector-then-raster fusion
 order reflects the inductive bias of “geometry first, appearance
 second.”
-</div>
+</div> -->
 
 ## Prior Preparation
 <div align="center">
