@@ -58,6 +58,7 @@ order reflects the inductive bias of “geometry first, appearance
 second.”
 </div> -->
 
+<br><br>
 ## Prior Preparation
 <div align="center">
   <img src="assets/prior_example_new.jpg">
