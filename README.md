@@ -18,8 +18,6 @@
 
 <sub>(* indicates equal contribution, † indicates equal advising)</sub>
 
----
-
 </div>
 
 <!-- <table>
