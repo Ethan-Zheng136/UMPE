@@ -1,8 +1,6 @@
 <div align="center">
-
-# Unified Map Prior Encoder for Mapping and Planning
-
-### **ICRA 2026**
+<h2>Unified Map Prior Encoder for Mapping and Planning</h2>
+<p style="font-size: 64px; font-weight: bold; margin-top: 10px;"><strong>ICRA 2026</strong></p>
 
 **Zongzheng Zhang**<sup>1,2*</sup> · **Sizhe Zou**<sup>1*</sup> · **Guantian Zheng**<sup>1*</sup> · **Zhenxin Zhu**<sup>1</sup> · **Yu Gao**<sup>2</sup> <br>
 **Guoxuan Chi**<sup>1</sup> · **Shuo Wang**<sup>2</sup> · **Yuwen Heng**<sup>2</sup> · **Zhigang Sun**<sup>2</sup> · **Yiru Wang**<sup>2</sup> <br>
