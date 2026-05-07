@@ -2,7 +2,7 @@
 
 # Unified Map Prior Encoder for Mapping and Planning
 
-***ICRA 2026***
+### **ICRA 2026**
 
 **Zongzheng Zhang**<sup>1,2*</sup> · **Sizhe Zou**<sup>1*</sup> · **Guantian Zheng**<sup>1*</sup> · **Zhenxin Zhu**<sup>1</sup> · **Yu Gao**<sup>2</sup> <br>
 **Guoxuan Chi**<sup>1</sup> · **Shuo Wang**<sup>2</sup> · **Yuwen Heng**<sup>2</sup> · **Zhigang Sun**<sup>2</sup> · **Yiru Wang**<sup>2</sup> <br>
@@ -11,12 +11,14 @@
 &nbsp;
 
 <sup>1</sup> Institute for AI Industry Research (AIR), Tsinghua University <br>
-<sup>2</sup> Bosch Corporate Research <br>
-<sup>3</sup> Institute for Interdisciplinary Information Sciences (IIIS), Tsinghua University <br>
-<sup>4</sup> University of Hong Kong 
+<sup>2</sup> Bosch Corporate Research, China <br>
+<sup>3</sup> Shanghai Jiao Tong University <br>
+<sup>4</sup> Chinese University of Hong Kong, Shenzhen 
 <br>
 
-<sub>(* indicates equal contribution, † indicates corresponding author)</sub>
+<sub>(* indicates equal contribution, † indicates equal advising)</sub>
+
+---
 
 </div>
 
