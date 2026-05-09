@@ -40,13 +40,7 @@ pip install mmsegmentation==0.14.1
 pip install timm
 ```
 
-
-**f. Clone MapTR.**
-```
-git clone https://github.com/hustvl/MapTR.git
-```
-
-**g. Install mmdet3d and GKT**
+**f. Install mmdet3d and GKT**
 ```shell
 cd /path/to/Maptrv2/mmdetection3d
 python setup.py develop
@@ -56,13 +50,13 @@ python setup.py build install
 
 ```
 
-**h. Install other requirements.**
+**g. Install other requirements.**
 ```shell
 cd /path/to/Maptrv2
 pip install -r requirement.txt
 ```
 
-**i. Prepare pretrained models.**
+**h. Prepare pretrained models.**
 ```shell
 cd /path/to/Maptrv2
 mkdir ckpts
