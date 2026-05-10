@@ -12,25 +12,25 @@
 Train MapTRv2 with 8 GPUs 
 ```
 cd /path/to/MapTRv2
-./tools/dist_train.sh ./projects/configs/maptrv2/maptrv2_nsuc_r50_24_UMPE_.py 8
+./tools/dist_train.sh ./projects/configs/maptrv2/maptrv2_nsuc_r50_24_umpe.py 8
 ```
 
 Eval MapTRv2
 ```
 cd /path/to/MapTRv2
-./tools/dist_test_map.sh ./projects/configs/maptrv2/maptrv2_nusc_r50_24e_UMPE.py ./path/to/ckpts.pth
+./tools/dist_test_map.sh ./projects/configs/maptrv2/maptrv2_nusc_r50_24e_umpe.py ./path/to/ckpts.pth
 ```
 
 Train MapQR with 8 GPUs 
 ```
 cd /path/to/MapQR
-./tools/dist_train.sh ./projects/configs/mapqr/mapqr_nusc_r50_24ep_new_UMPE.py 8
+./tools/dist_train.sh ./projects/configs/mapqr/mapqr_nusc_r50_24ep_new_umpe.py 8
 ```
 
 Eval MapQR
 ```
 cd /path/to/MapQR
-./tools/dist_test_map.sh ./projects/configs/mapqr/mapqr_nusc_r50_24ep_new_UMPE.py ./path/to/ckpts.pth
+./tools/dist_test_map.sh ./projects/configs/mapqr/mapqr_nusc_r50_24ep_new_umpe.py ./path/to/ckpts.pth
 ```
 
 
