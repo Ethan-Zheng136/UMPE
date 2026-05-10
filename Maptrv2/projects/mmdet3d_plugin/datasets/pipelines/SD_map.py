@@ -7,10 +7,10 @@ from mmdet.datasets.builder import PIPELINES
 
 @PIPELINES.register_module()
 class LoadSDRasterFromFile:
-    def __init__(self, to_float32=True, normalize=True):
+    def __init__(self, to_float32=True, normalize=True, sdmap_root=None):
         self.to_float32 = to_float32
         self.normalize = normalize
-        self.sdmap_root = '/path/to/your/data'
+        self.sdmap_root = sdmap_root
     
     def __call__(self, results):
         token = results['sample_idx']

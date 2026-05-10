@@ -9,8 +9,8 @@ plugin_dir = 'projects/mmdet3d_plugin/'
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
 # point_cloud_range = [-51.2, -51.2, -5.0, 51.2, 51.2, 3.0]
-point_cloud_range = [-30.0, -15.0, -5.0, 30.0, 15.0, 3.0]
-voxel_size = [0.15, 0.15, 8.0]
+point_cloud_range = [-15.0, -30.0,-10.0, 15.0, 30.0, 10.0]
+voxel_size = [0.15, 0.15, 20.0]
 dbound=[1.0, 35.0, 0.5]
 
 grid_config = {
@@ -50,10 +50,12 @@ _dim_ = 256
 _pos_dim_ = _dim_//2
 _ffn_dim_ = _dim_*2
 _num_levels_ = 1
+_num_heads_ = 4
 # bev_h_ = 50
 # bev_w_ = 50
-bev_h_ = 100
-bev_w_ = 200
+bev_h_ = 200
+bev_w_ = 100
+
 queue_length = 1 # each sequence contains `queue_length` frames.
 
 aux_seg_cfg = dict(
@@ -63,11 +65,6 @@ aux_seg_cfg = dict(
     seg_classes=1,
     feat_down_sample=32,
     pv_thickness=1,
-)
-
-z_cfg = dict(
-    pred_z_flag=True,
-    gt_z_flag=True,
 )
 
 model = dict(
@@ -92,12 +89,34 @@ model = dict(
         add_extra_convs='on_output',
         num_outs=_num_levels_,
         relu_before_extra_convs=True),
+    map_encoder=dict(
+        type='MapGraphTransformer',
+        input_dim=365,  # 32 * 11 + 11 + 2
+        dmodel=_dim_,      # TODO: maybe change?
+        hidden_dim=_dim_,  # TODO: maybe change?
+        nheads=_num_heads_,
+        nlayers=6,
+        batch_first=True,
+        pos_encoder=dict(
+            type='SineContinuousPositionalEncoding',
+            num_feats=16,  # 2 * 16 = 32 final dim
+            temperature=1000,
+            normalize=True,
+            range=[point_cloud_range[3] - point_cloud_range[0], point_cloud_range[4] - point_cloud_range[1]],
+            offset=[point_cloud_range[0], point_cloud_range[1]],
+        ),
+    ),
+    aligner=dict(
+        type='AlignNet',
+        hidden_dim=_dim_,
+        in_channels=_dim_,
+    ),
     pts_bbox_head=dict(
         type='MapTRv2Head',
         bev_h=bev_h_,
         bev_w=bev_w_,
         num_query=900,
-        num_vec_one2one=num_vec,
+        num_vec_one2one=50,
         num_vec_one2many=300,
         k_one2many=6,
         num_pts_per_vec=fixed_ptsnum_per_pred_line, # one bbox
@@ -111,19 +130,16 @@ model = dict(
         sync_cls_avg_factor=True,
         with_box_refine=True,
         as_two_stage=False,
-        code_size=3,
+        code_size=2,
         code_weights=[1.0, 1.0, 1.0, 1.0],
         aux_seg=aux_seg_cfg,
-        z_cfg=z_cfg,
+        # z_cfg=z_cfg,
         transformer=dict(
             type='MapTRPerceptionTransformer',
-            num_cams=7,
-            z_cfg=z_cfg,
             rotate_prev_bev=True,
             use_shift=True,
             use_can_bus=True,
             embed_dims=_dim_,
-            # ===zgt===
             raster_encoder=dict(
                 type='StageFiLMRasterEncoder', 
                 embed_dims=_dim_,
@@ -139,6 +155,16 @@ model = dict(
                 bev_h=bev_h_,
                 bev_w=bev_w_
             ),
+            vector_fusion_layer=dict(
+                type='DualVecCrossFusion',
+                embed_dims=_dim_,
+                num_heads=_num_heads_,
+                source_dropout_p=0.3,
+                bev_h=bev_h_,
+                bev_w=bev_w_,
+                init_cfg=dict(type='Xavier', layer='Linear', distribution='uniform'),
+            ),
+
             encoder=dict(
                 type='LSSTransform',
                 in_channels=_dim_,
@@ -183,8 +209,7 @@ model = dict(
         bbox_coder=dict(
             type='MapTRNMSFreeCoder',
             # post_center_range=[-61.2, -61.2, -10.0, 61.2, 61.2, 10.0],
-            z_cfg=z_cfg,
-            post_center_range=[-35, -20, -35, -20, 35, 20, 35, 20],
+            post_center_range=[-20, -35, -20, -35, 20, 35, 20, 35],
             pc_range=point_cloud_range,
             max_num=50,
             voxel_size=voxel_size,
@@ -220,7 +245,6 @@ model = dict(
         out_size_factor=4,
         assigner=dict(
             type='MapTRAssigner',
-            z_cfg=z_cfg,
             cls_cost=dict(type='FocalLossCost', weight=2.0),
             reg_cost=dict(type='BBoxL1Cost', weight=0.0, box_format='xywh'),
             # reg_cost=dict(type='BBox3DL1Cost', weight=0.25),
@@ -230,34 +254,45 @@ model = dict(
                       weight=5),
             pc_range=point_cloud_range))))
 
-dataset_type = 'CustomAV2OfflineLocalMapDataset'
-data_root = 'data/argoverse2/sensor/'
+dataset_type = 'CustomNuScenesOfflineLocalMapDataset'
+data_root = 'data/nuscenes/'
+satellite_root    = 'data/nuscenes/satellite_map_dataset/rotated_trainval'
+sdmap_raster_root = 'data/nuscenes/sd_map_reraster2_vis'
+sdmap_pkl         = 'data/nuscenes/inter_nuscenes_trainval_sdmap_new.pkl'
+hdmap_pkl         = 'data/nuscenes/interpolated_nuscenes_trainval_hdmap.pkl'
 file_client_args = dict(backend='disk')
 
 
 train_pipeline = [
-    dict(type='CustomLoadMultiViewImageFromFiles', to_float32=True, padding=True),
-    dict(type='RandomScaleImageMultiViewImage', scales=[0.3]),
+    dict(type='LoadMultiViewImageFromFiles', to_float32=True),
+    dict(type='RandomScaleImageMultiViewImage', scales=[0.5]),
     dict(type='PhotoMetricDistortionMultiViewImage'),
     dict(type='NormalizeMultiviewImage', **img_norm_cfg),
-    dict(type='PadMultiViewImage', size_divisor=32),
+    dict(
+        type='LoadPointsFromFile',
+        coord_type='LIDAR',
+        load_dim=5,
+        use_dim=5,
+        file_client_args=file_client_args),
+    dict(type='CustomPointToMultiViewDepth', downsample=1, grid_config=grid_config),
+    dict(type='PadMultiViewImageDepth', size_divisor=32), 
     dict(type='DefaultFormatBundle3D', with_gt=False, with_label=False,class_names=map_classes),
-    # ===zgt===
-    dict(type='LoadSatelliteFromFile', bev_h=bev_h_, bev_w=bev_w_, to_float32=True, normalize=True),
-    dict(type='LoadSDRasterFromFile', bev_h=bev_h_, bev_w=bev_w_, to_float32=True, normalize=True),
-    # dict(type='CustomCollect3D', keys=['img']),
-    dict(type='CustomCollect3D', keys=['img', 'satellite_img', 'SDRaster_img']),
+    dict(type='LoadSatelliteFromFile', to_float32=True, normalize=True, satellite_root=satellite_root),
+    dict(type='LoadSDRasterFromFile', to_float32=True, normalize=True, sdmap_root=sdmap_raster_root),
+    dict(type='CustomCollect3D', keys=['img', 'gt_depth', 'satellite_img', 'SDRaster_img', 'sdmap', 'hdmap'])
+    # dict(type='CustomCollect3D', keys=['img', 'gt_depth', 'SDRaster_img'])
+    # dict(type='CustomCollect3D', keys=['img', 'gt_depth', 'satellite_img'])
 ]
 
 test_pipeline = [
-    dict(type='CustomLoadMultiViewImageFromFiles', to_float32=True, padding=True),
-    dict(type='RandomScaleImageMultiViewImage', scales=[0.3]),
+    dict(type='LoadMultiViewImageFromFiles', to_float32=True),
+    dict(type='RandomScaleImageMultiViewImage', scales=[0.5]),
     dict(type='NormalizeMultiviewImage', **img_norm_cfg),
-    dict(type='LoadSatelliteFromFile', bev_h=bev_h_, bev_w=bev_w_, to_float32=True, normalize=True),
-    dict(type='LoadSDRasterFromFile', bev_h=bev_h_, bev_w=bev_w_, to_float32=True, normalize=True),
+    dict(type='LoadSatelliteFromFile', to_float32=True, normalize=True, satellite_root=satellite_root),
+    dict(type='LoadSDRasterFromFile', to_float32=True, normalize=True, sdmap_root=sdmap_raster_root),
     dict(
         type='MultiScaleFlipAug3D',
-        img_scale=(2048, 2048), # 2048*0.3, 2048*0.3
+        img_scale=(1600, 900),
         pts_scale_ratio=1,
         flip=False,
         transforms=[
@@ -267,19 +302,19 @@ test_pipeline = [
                 with_gt=False, 
                 with_label=False,
                 class_names=map_classes),
-            # dict(type='CustomCollect3D', keys=['img']),
-            dict(type='CustomCollect3D', keys=['img', 'satellite_img', 'SDRaster_img']),
+            dict(type='CustomCollect3D', keys=['img', 'satellite_img', 'SDRaster_img', 'sdmap', 'hdmap'])
         ])
 ]
 
 data = dict(
-    samples_per_gpu=8,
-    workers_per_gpu=4,
+    samples_per_gpu=1,
+    workers_per_gpu=4, # TODO
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'av2_map_infos_train.pkl',
-        z_cfg=z_cfg,
+        ann_file=data_root + 'nuscenes_map_infos_temporal_train.pkl',
+        sdmap_pkl=sdmap_pkl,
+        hdmap_pkl=hdmap_pkl,
         pipeline=train_pipeline,
         classes=class_names,
         modality=input_modality,
@@ -299,31 +334,24 @@ data = dict(
     val=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'av2_map_infos_val.pkl',
-        map_ann_file=data_root + 'av2_gt_map_anns_val.json',
-        # code_size=3,
-        z_cfg=z_cfg,
-        load_interval=4, # av2 uses 10 Hz, set to 5, 2HZ the same as nuscenes,
-        # load_interval=1, # TODO debug
-        pipeline=test_pipeline,  
-        bev_size=(bev_h_, bev_w_),
+        ann_file=data_root + 'nuscenes_map_infos_temporal_val.pkl',
+        sdmap_pkl=sdmap_pkl,
+        hdmap_pkl=hdmap_pkl,
+        map_ann_file=data_root + 'nuscenes_map_anns_val.json',
+        pipeline=test_pipeline,  bev_size=(bev_h_, bev_w_),
         pc_range=point_cloud_range,
         fixed_ptsnum_per_line=fixed_ptsnum_per_gt_line,
         eval_use_same_gt_sample_num_flag=eval_use_same_gt_sample_num_flag,
         padding_value=-10000,
         map_classes=map_classes,
-        classes=class_names, 
-        modality=input_modality, 
-        samples_per_gpu=1),
+        classes=class_names, modality=input_modality, samples_per_gpu=1),
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file=data_root + 'av2_map_infos_val.pkl',
-        map_ann_file=data_root + 'av2_gt_map_anns_val.json',
-        # code_size=3,
-        z_cfg=z_cfg,
-        load_interval=4, # av2 uses 10 Hz, set to 5, 2HZ the same as nuscenes,
-        # load_interval=1, # TODO debug
+        ann_file=data_root + 'nuscenes_map_infos_temporal_val.pkl',
+        sdmap_pkl=sdmap_pkl,
+        hdmap_pkl=hdmap_pkl,
+        map_ann_file=data_root + 'nuscenes_map_anns_val.json',
         pipeline=test_pipeline, 
         bev_size=(bev_h_, bev_w_),
         pc_range=point_cloud_range,
@@ -339,38 +367,38 @@ data = dict(
 
 optimizer = dict(
     type='AdamW',
-    lr=6e-5,
+    lr=6e-4,
     paramwise_cfg=dict(
         custom_keys={
-            'img_backbone': dict(lr_mult=0.1),
-            'pts_bbox_head.transformer.raster_encoder': dict(lr_mult=0.1),
+            'img_backbone': dict(lr_mult=0.1),          
+            'pts_bbox_head.transformer.raster_encoder': dict(lr_mult=5.0),
+            'pts_bbox_head.transformer.fusion_module': dict(lr_mult=5.0),
+            'map_encoder': dict(lr_mult=5.0),
+            'aligner': dict(lr_mult=5.0),
+            'pts_bbox_head.transformer.vector_fusion_layer': dict(lr_mult=5.0),
+            'pts_bbox_head.transformer.decoder.layers.0': dict(lr_mult=0.0),
+            'pts_bbox_head.transformer.decoder.layers.1': dict(lr_mult=0.0),
+            'pts_bbox_head.transformer.decoder.layers.2': dict(lr_mult=0.0),
+            'pts_bbox_head.transformer.decoder.layers.3': dict(lr_mult=0.0),
+            'pts_bbox_head.transformer.decoder.layers.4': dict(lr_mult=0.1),
+            'pts_bbox_head.transformer.decoder.layers.5': dict(lr_mult=0.1),
         }),
     weight_decay=0.01)
 
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
+
 # learning policy
 lr_config = dict(
     policy='CosineAnnealing',
     warmup='linear',
-    warmup_iters=200,
+    warmup_iters=500,
     warmup_ratio=1.0 / 3,
     min_lr_ratio=1e-3)
-total_epochs = 12
-evaluation = dict(interval=1, pipeline=test_pipeline, metric='chamfer')
+total_epochs = 72
+evaluation = dict(interval=2, pipeline=test_pipeline, metric='chamfer',
+                  save_best='NuscMap_chamfer/mAP', rule='greater')
 # total_epochs = 50
 # evaluation = dict(interval=1, pipeline=test_pipeline)
-
-custom_hooks = [
-    dict(type='AlphaScheduleHook',
-         start_iter=0,           
-         end_iter=10000,         
-         start_alpha=0.2,   
-         target_alpha=0.6,     
-         schedule_type='cosine'),
-
-    dict(type='FusionAlphaMonitorHook',
-         log_interval=100),
-]
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
@@ -380,10 +408,23 @@ log_config = dict(
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook')
     ])
+
+custom_hooks = [
+    dict(type='AlphaScheduleHook',
+         start_iter=0,           
+         end_iter=20000,         
+         start_alpha=0.0,   
+         target_alpha=0.2,     
+         schedule_type='cosine'),
+
+    dict(type='FusionAlphaMonitorHook',
+         log_interval=100),
+]
+
 fp16 = dict(loss_scale=512.)
-checkpoint_config = dict(interval=1)
+# checkpoint_config = dict(max_keep_ckpts=1, interval=2)
+checkpoint_config = dict(
+    interval=1,          
+    max_keep_ckpts=48,     
+)
 find_unused_parameters=True
-
-work_dir = './outputs/stage3'
-
-load_from = '/share/gha/shared/MapTR-maptrv2/outputs/stage2/epoch_11.pth'

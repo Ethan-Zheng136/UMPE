@@ -430,6 +430,33 @@ class MapTRPerceptionTransformer(BaseModule):
         #         sd_tokens=vector_feats[1], sd_U=vector_feats[3],
         #     )
 
+        # if self.raster_encoder is not None and (satellite_img is not None or SDRaster_img is not None):  
+        #     raster_prior = self.raster_encoder(
+        #         sat=satellite_img,          # [1, 200, 100, 3] or None
+        #         sd=SDRaster_img,           # [1, 200, 100, 3] or None  
+        #     )
+        #     if self.fusion_module is not None and raster_prior is not None:
+        #         bev_embed = self.fusion_module(
+        #             bev_embed, 
+        #             raster_prior,
+        #         )
+
+        # # print(f'[DEBUG] vector_feats is None: {vector_feats is None}')
+        # if vector_feats is not None:
+        #     bev_embed, fusion_info = self.vector_fusion_layer(
+        #         bev_embed, 
+        #         hd_tokens=vector_feats[0], hd_U=vector_feats[2], 
+        #         sd_tokens=vector_feats[1], sd_U=vector_feats[3],
+        #     )
+
+        # print(f'[DEBUG] vector_feats is None: {vector_feats is None}')
+        if vector_feats is not None:
+            bev_embed, fusion_info = self.vector_fusion_layer(
+                bev_embed, 
+                hd_tokens=vector_feats[0], hd_U=vector_feats[2], 
+                sd_tokens=vector_feats[1], sd_U=vector_feats[3],
+            )
+
         if self.raster_encoder is not None and (satellite_img is not None or SDRaster_img is not None):  
             raster_prior = self.raster_encoder(
                 sat=satellite_img,          # [1, 200, 100, 3] or None
@@ -440,13 +467,6 @@ class MapTRPerceptionTransformer(BaseModule):
                     bev_embed, 
                     raster_prior,
                 )
-
-        if vector_feats is not None:
-            bev_embed, fusion_info = self.vector_fusion_layer(
-                bev_embed, 
-                hd_tokens=vector_feats[0], hd_U=vector_feats[2], 
-                sd_tokens=vector_feats[1], sd_U=vector_feats[3],
-            )
 
         depth = ouput_dic['depth']
         bs = mlvl_feats[0].size(0)

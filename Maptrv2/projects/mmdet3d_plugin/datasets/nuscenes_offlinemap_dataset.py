@@ -1039,6 +1039,8 @@ class CustomNuScenesOfflineLocalMapDataset(CustomNuScenesDataset):
                  map_classes=None,
                  noise='None',
                  noise_std=0,
+                 sdmap_pkl=None,
+                 hdmap_pkl=None,
                  aux_seg = dict(
                     use_aux_seg=False,
                     bev_seg=False,
@@ -1075,8 +1077,10 @@ class CustomNuScenesOfflineLocalMapDataset(CustomNuScenesDataset):
         self.noise = noise
         self.noise_std = noise_std
         # ===Vector===
-        self.vectorized_sdmap = pickle.load(open('/DATA_EDS2/zousz2407/VAD_pro/VAD/data/nuscenes/inter_nuscenes_trainval_sdmap_new.pkl', 'rb'))
-        self.vectorized_hdmap = pickle.load(open('/DATA_EDS2/zousz2407/VAD_pro/VAD/data/nuscenes/interpolated_nuscenes_trainval_hdmap.pkl', 'rb'))
+        self.vectorized_sdmap = pickle.load(open(sdmap_pkl, 'rb'))
+        self.vectorized_hdmap = pickle.load(open(hdmap_pkl, 'rb'))
+        # self.vectorized_sdmap = pickle.load(open('/DATA_EDS2/zousz2407/VAD_pro/VAD/data/nuscenes/inter_nuscenes_trainval_sdmap_new.pkl', 'rb'))
+        # self.vectorized_hdmap = pickle.load(open('/DATA_EDS2/zousz2407/VAD_pro/VAD/data/nuscenes/interpolated_nuscenes_trainval_hdmap.pkl', 'rb'))
 
 
     @classmethod

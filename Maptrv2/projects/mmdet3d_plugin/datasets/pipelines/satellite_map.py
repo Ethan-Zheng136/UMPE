@@ -7,10 +7,10 @@ from mmdet.datasets.builder import PIPELINES
 
 @PIPELINES.register_module()
 class LoadSatelliteFromFile:
-    def __init__(self, to_float32=True, normalize=True):
+    def __init__(self, to_float32=True, normalize=True, satellite_root=None):
         self.to_float32 = to_float32
         self.normalize = normalize
-        self.satellite_root = "/path/to/your/data"
+        self.satellite_root = satellite_root
     
     def __call__(self, results):
         timestamp = results['timestamp']

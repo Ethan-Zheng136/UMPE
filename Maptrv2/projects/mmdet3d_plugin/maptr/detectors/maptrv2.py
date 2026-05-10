@@ -128,9 +128,12 @@ class MapTRv2(MVXTwoStageDetector):
 
     def extract_map_feat(self, map_graph, map_type, img_feats):
         """Extract features from images and points."""
+        if self.map_encoder is None:
+            print('vectorized stream is not ready!')
+            return None, None
+        # print('vectorized stream is ready!')
         sd_map_feats, conf_token = self.map_encoder(map_graph, map_type, img_feats)
         return sd_map_feats, conf_token
-
 
     @auto_fp16(apply_to=('img'), out_fp32=True)
     def extract_feat(self, img, img_metas=None, len_queue=None):
@@ -347,14 +350,25 @@ class MapTRv2(MVXTwoStageDetector):
 
         img_metas = [each[len_queue-1] for each in img_metas]
         img_feats = self.extract_feat(img=img, img_metas=img_metas)
-        hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=hdmap, map_type='hdmap', img_feats=img_feats)
-        sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=sdmap, map_type='sdmap', img_feats=img_feats)
-        raw_bev_embed = self.pts_bbox_head(img_feats, lidar_feat, img_metas, prev_bev, only_bev=True)
-        calibrated_hdmap, _ = self.hd_aligner(raw_bev_embed, hd_map_graph_feats, hdmap, map_type='hdmap', img_feats=img_feats)
-        calibrated_sdmap, _ = self.sd_aligner(raw_bev_embed, sd_map_graph_feats, sdmap, map_type='sdmap', img_feats=img_feats)
-        hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=calibrated_hdmap, map_type=None, img_feats=img_feats)
-        sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=calibrated_sdmap, map_type=None, img_feats=img_feats)
-        vector_feats = [hd_map_graph_feats, sd_map_graph_feats, hd_conf_token, sd_conf_token]
+        # hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=hdmap, map_type='hdmap', img_feats=img_feats)
+        # sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=sdmap, map_type='sdmap', img_feats=img_feats)
+        # raw_bev_embed = self.pts_bbox_head(img_feats, lidar_feat, img_metas, prev_bev, only_bev=True)
+        # calibrated_hdmap, _ = self.hd_aligner(raw_bev_embed, hd_map_graph_feats, hdmap, map_type='hdmap', img_feats=img_feats)
+        # calibrated_sdmap, _ = self.sd_aligner(raw_bev_embed, sd_map_graph_feats, sdmap, map_type='sdmap', img_feats=img_feats)
+        # hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=calibrated_hdmap, map_type=None, img_feats=img_feats)
+        # sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=calibrated_sdmap, map_type=None, img_feats=img_feats)
+        # vector_feats = [hd_map_graph_feats, sd_map_graph_feats, hd_conf_token, sd_conf_token]
+        if self.map_encoder is not None:
+            hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=hdmap, map_type='hdmap', img_feats=img_feats)
+            sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=sdmap, map_type='sdmap', img_feats=img_feats)
+            raw_bev_embed = self.pts_bbox_head(img_feats, lidar_feat, img_metas, prev_bev, only_bev=True)
+            calibrated_hdmap, _ = self.hd_aligner(raw_bev_embed, hd_map_graph_feats, hdmap, map_type='hdmap', img_feats=img_feats)
+            calibrated_sdmap, _ = self.sd_aligner(raw_bev_embed, sd_map_graph_feats, sdmap, map_type='sdmap', img_feats=img_feats)
+            hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=calibrated_hdmap, map_type=None, img_feats=img_feats)
+            sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=calibrated_sdmap, map_type=None, img_feats=img_feats)
+            vector_feats = [hd_map_graph_feats, sd_map_graph_feats, hd_conf_token, sd_conf_token]
+        else:
+            vector_feats = None
         losses = dict()
         losses_pts = self.forward_pts_train(img_feats, lidar_feat, gt_bboxes_3d,
                                             gt_labels_3d, img_metas,
@@ -476,26 +490,50 @@ class MapTRv2(MVXTwoStageDetector):
         return outs['bev_embed'], bbox_results
         
     def simple_test(self, img_metas, img=None, points=None, prev_bev=None, satellite_img=None, SDRaster_img=None, sdmap=None, hdmap=None, vector_feats=None, rescale=False, **kwargs):
-        """Test function without augmentaiton."""
         lidar_feat = None
         if self.modality =='fusion':
             lidar_feat = self.extract_lidar_feat(points)
         img_feats = self.extract_feat(img=img, img_metas=img_metas)
-        hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=hdmap, map_type='hdmap', img_feats=img_feats)
-        sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=sdmap, map_type='sdmap', img_feats=img_feats)
-        raw_bev_embed = self.pts_bbox_head(img_feats, lidar_feat, img_metas, prev_bev, only_bev=True)
-        calibrated_hdmap, _ = self.hd_aligner(raw_bev_embed, hd_map_graph_feats, hdmap, map_type='hdmap', img_feats=img_feats)
-        calibrated_sdmap, _ = self.sd_aligner(raw_bev_embed, sd_map_graph_feats, sdmap, map_type='sdmap', img_feats=img_feats)
-        hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=calibrated_hdmap, map_type=None, img_feats=img_feats)
-        sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=calibrated_sdmap, map_type=None, img_feats=img_feats)
-        vector_feats = [hd_map_graph_feats, sd_map_graph_feats, hd_conf_token, sd_conf_token]
         
+        if self.map_encoder is not None:
+            hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=hdmap, map_type='hdmap', img_feats=img_feats)
+            sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=sdmap, map_type='sdmap', img_feats=img_feats)
+            raw_bev_embed = self.pts_bbox_head(img_feats, lidar_feat, img_metas, prev_bev, only_bev=True)
+            calibrated_hdmap, _ = self.hd_aligner(raw_bev_embed, hd_map_graph_feats, hdmap, map_type='hdmap', img_feats=img_feats)
+            calibrated_sdmap, _ = self.sd_aligner(raw_bev_embed, sd_map_graph_feats, sdmap, map_type='sdmap', img_feats=img_feats)
+            hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=calibrated_hdmap, map_type=None, img_feats=img_feats)
+            sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=calibrated_sdmap, map_type=None, img_feats=img_feats)
+            vector_feats = [hd_map_graph_feats, sd_map_graph_feats, hd_conf_token, sd_conf_token]
+        else:
+            vector_feats = None
+
         bbox_list = [dict() for i in range(len(img_metas))]
         new_prev_bev, bbox_pts = self.simple_test_pts(
             img_feats, lidar_feat, img_metas, prev_bev, satellite_img=satellite_img, SDRaster_img=SDRaster_img, vector_feats=vector_feats, rescale=rescale)
         for result_dict, pts_bbox in zip(bbox_list, bbox_pts):
             result_dict['pts_bbox'] = pts_bbox
         return new_prev_bev, bbox_list
+    # def simple_test(self, img_metas, img=None, points=None, prev_bev=None, satellite_img=None, SDRaster_img=None, sdmap=None, hdmap=None, vector_feats=None, rescale=False, **kwargs):
+    #     """Test function without augmentaiton."""
+    #     lidar_feat = None
+    #     if self.modality =='fusion':
+    #         lidar_feat = self.extract_lidar_feat(points)
+    #     img_feats = self.extract_feat(img=img, img_metas=img_metas)
+    #     hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=hdmap, map_type='hdmap', img_feats=img_feats)
+    #     sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=sdmap, map_type='sdmap', img_feats=img_feats)
+    #     raw_bev_embed = self.pts_bbox_head(img_feats, lidar_feat, img_metas, prev_bev, only_bev=True)
+    #     calibrated_hdmap, _ = self.hd_aligner(raw_bev_embed, hd_map_graph_feats, hdmap, map_type='hdmap', img_feats=img_feats)
+    #     calibrated_sdmap, _ = self.sd_aligner(raw_bev_embed, sd_map_graph_feats, sdmap, map_type='sdmap', img_feats=img_feats)
+    #     hd_map_graph_feats, hd_conf_token = self.extract_map_feat(map_graph=calibrated_hdmap, map_type=None, img_feats=img_feats)
+    #     sd_map_graph_feats, sd_conf_token = self.extract_map_feat(map_graph=calibrated_sdmap, map_type=None, img_feats=img_feats)
+    #     vector_feats = [hd_map_graph_feats, sd_map_graph_feats, hd_conf_token, sd_conf_token]
+        
+    #     bbox_list = [dict() for i in range(len(img_metas))]
+    #     new_prev_bev, bbox_pts = self.simple_test_pts(
+    #         img_feats, lidar_feat, img_metas, prev_bev, satellite_img=satellite_img, SDRaster_img=SDRaster_img, vector_feats=vector_feats, rescale=rescale)
+    #     for result_dict, pts_bbox in zip(bbox_list, bbox_pts):
+    #         result_dict['pts_bbox'] = pts_bbox
+    #     return new_prev_bev, bbox_list
 
 
     # def plot_transform_params(self):
