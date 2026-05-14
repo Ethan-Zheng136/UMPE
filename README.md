@@ -138,4 +138,14 @@ Our checkpoints for MapTRv2 and MapQR are available for download [**here**](http
 
 This repository is licensed under [Apache 2.0](LICENSE).
 
+## Citation
+If you find this project useful, feel free to cite our work!
 
+```bibtex
+@article{zhang2026unified,
+  title={Unified Map Prior Encoder for Mapping and Planning},
+  author={Zhang, Zongzheng and Zou, Sizhe and Zheng, Guantian and Zhu, Zhenxin and Gao, Yu and Chi, Guoxuan and Wang, Shuo and Heng, Yuwen and Sun, Zhigang and Wang, Yiru and Sun, Hao and Ma, Chao and Li, Zhen and Jiang, Anqing and Zhao, Hao},
+  journal={arXiv preprint arXiv:2605.02762},
+  year={2026}
+}
+```
