@@ -107,7 +107,7 @@ Our pre-processed map prior datasets for nuScenes and Argoverse 2 are available 
 ![vis](assets/3_video_new.gif)
 ![vis](assets/4_video_new.gif)
 
-Our checkpoints for MapTRv2 and MapQR are available for download [**here**](https://drive.google.com/drive/folders/1G_OuDVUIDsJc_Ie-TNF0LC6M5CBMyNoK?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto).
+Our checkpoints for MapTRv2 are available for download [**here**](https://drive.google.com/drive/folders/1G_OuDVUIDsJc_Ie-TNF0LC6M5CBMyNoK?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto).
 
 
 ## Getting Started
