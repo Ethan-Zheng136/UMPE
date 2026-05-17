@@ -124,7 +124,6 @@ Our checkpoints for MapTRv2 are available for download [**here**](https://drive.
 - [x] Code release
   - [x] MapTRv2
   - [x] MapQR
-  - [ ] VAD
 - [x] Visualization Code
 - [x] Untested version released + Instructions
 - [x] Initialization
