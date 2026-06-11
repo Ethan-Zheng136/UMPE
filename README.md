@@ -4,7 +4,7 @@
 
 **Zongzheng Zhang**<sup>1,2*</sup> · **Sizhe Zou**<sup>1*</sup> · **Guantian Zheng**<sup>1*</sup> · **Zhenxin Zhu**<sup>1</sup> · **Yu Gao**<sup>2</sup> <br>
 **Guoxuan Chi**<sup>1</sup> · **Shuo Wang**<sup>2</sup> · **Yuwen Heng**<sup>2</sup> · **Zhigang Sun**<sup>2</sup> · **Yiru Wang**<sup>2</sup> <br>
-[**Hao Sun**](https://cn.linkedin.com/in/hao-sun-55650090)<sup>2</sup> · [**Chao Ma**](https://sites.google.com/site/chaoma99/)<sup>3</sup> · [**Zhen Li**](https://mypage.cuhk.edu.cn/academics/lizhen/)<sup>4</sup> · **Anqing Jiang**<sup>2†</sup> · [**Hao Zhao**](https://sites.google.com/view/fromandto/)<sup>1†</sup>
+[**Hao Sun**](https://cn.linkedin.com/in/hao-sun-55650090)<sup>2</sup> · [**Chao Ma**](https://sites.google.com/site/chaoma99/)<sup>3</sup> · [**Zhen Li**](https://mypage.cuhk.edu.cn/academics/lizhen/)<sup>4</sup> · [**Anqing Jiang**](https://peterjaq.github.io/)<sup>2†</sup> · [**Hao Zhao**](https://sites.google.com/view/fromandto/)<sup>1†</sup>
 
 &nbsp;
 
